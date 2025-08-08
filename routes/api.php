@@ -1,0 +1,53 @@
+<?php
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\API\AlmacenController;
+use App\Http\Controllers\API\CategoriaController;
+use App\Http\Controllers\API\CompraController;
+use App\Http\Controllers\API\CompraDetalleController;
+use App\Http\Controllers\API\EntregaController;
+use App\Http\Controllers\API\EntregaDetalleController;
+use App\Http\Controllers\API\EstadoController;
+use App\Http\Controllers\API\LoteController;
+use App\Http\Controllers\API\MermaController;
+use App\Http\Controllers\API\MovimientoInventarioController;
+use App\Http\Controllers\API\ProductoController;
+use App\Http\Controllers\API\ProveedorController;
+use App\Http\Controllers\API\RolController;
+use App\Http\Controllers\API\SolicitudController;
+use App\Http\Controllers\API\SolicitudDetalleController;
+use App\Http\Controllers\API\SucursalController;
+use App\Http\Controllers\API\TipoAlmacenController;
+use App\Http\Controllers\API\TipoMovimientoController;
+use App\Http\Controllers\API\UnidadMedidaController;
+use App\Http\Controllers\API\UsuarioController;
+
+Route::post('auth/login', [AuthController::class, 'login']);
+Route::post('auth/register', [AuthController::class, 'register']);
+
+Route::middleware(['auth:api'])->group(function () {
+    Route::post('auth/logout', [AuthController::class, 'logout']);
+    Route::get('auth/me', [AuthController::class, 'me']);
+    Route::get('/roles', [RolController::class, 'index']);
+    Route::apiResource('almacenes', AlmacenController::class);
+    Route::apiResource('categorias', CategoriaController::class);
+    Route::apiResource('compras', CompraController::class);
+    Route::apiResource('compra-detalles', CompraDetalleController::class);
+    Route::apiResource('entregas', EntregaController::class);
+    Route::apiResource('entrega-detalles', EntregaDetalleController::class);
+    Route::apiResource('estados', EstadoController::class);
+    Route::apiResource('lotes', LoteController::class);
+    Route::apiResource('mermas', MermaController::class);
+    Route::apiResource('movimientos-inventario', MovimientoInventarioController::class);
+    Route::apiResource('productos', ProductoController::class);
+    Route::apiResource('proveedores', ProveedorController::class);
+    Route::apiResource('roles', RolController::class);
+    Route::apiResource('solicitudes', SolicitudController::class);
+    Route::apiResource('solicitud-detalles', SolicitudDetalleController::class);
+    Route::apiResource('sucursales', SucursalController::class);
+    Route::apiResource('tipos-almacen', TipoAlmacenController::class);
+    Route::apiResource('tipos-movimiento', TipoMovimientoController::class);
+    Route::apiResource('unidades-medida', UnidadMedidaController::class);
+    Route::apiResource('usuarios', UsuarioController::class);
+});
